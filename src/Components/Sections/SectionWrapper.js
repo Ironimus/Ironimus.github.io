@@ -5,17 +5,8 @@ import { media } from 'utils/constants';
 class SectionWrapper extends Component {
   refForScroll = createRef();
 
-  changeBounds = () => {
-    const { offsetTop, offsetHeight } = this.refForScroll.current || {};
-    this.props.changeBounds(offsetTop + offsetHeight);
-  }
-
   componentDidMount() {
-    this.changeBounds();
-  }
-
-  componentDidUpdate() {
-    this.changeBounds();
+    this.props.setSectionRef(this.refForScroll);
   }
 
   render() {
