@@ -8,34 +8,31 @@ export const StyledBar = styled.div`
   justify-content: space-between;
   height: 64px;
   padding: 0 20px;
-  margin-top: 30px;
-  background-color: ${darken(.05, colors.background)};
+  margin-top: 5px;
+  background-color: ${darken(.03, colors.background)};
   font-size: 20px;
   z-index: 2;
 `;
 
-export const StyledBreadcrumbs = styled.div`
-  display: flex;
-  align-items: center;
+export const Breadcrumbs = styled.div`
   color: ${transparentize(.2, colors.text)};
+  direction: rtl;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 64px;
 `;
 
-const ResetButtonStyles = styled.button`
+export const FileListButton = styled.button`
+  height: 100%;
+  width: 100px;
+  margin-left: 20px;
   border: 0;
   background-color: transparent;
   color: inherit;
   font: inherit;
   cursor: pointer;
-`;
-
-export const BreadcrumbStep = ResetButtonStyles.extend`
-  &:hover {
-    text-decoration: underline;
-  }
-`;
-
-export const FileListButton = ResetButtonStyles.extend`
-  height: 100%;
 `;
 
 export const ArrowDownButtonSvg = styled.svg`

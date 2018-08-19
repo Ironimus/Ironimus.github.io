@@ -3,7 +3,7 @@ import SectionWrapper from 'Components/Sections/SectionWrapper';
 import styled from 'styled-components';
 import { Media } from 'utils';
 import ArrowDown from './ArrowDown';
-import TypingAnimation from './TypingAnimation';
+import TypingAnimation from 'Components/TypingAnimation';
 import { colors, breakpoints } from 'utils/constants';
 
 const StyledHomeSection = SectionWrapper.extend`
@@ -37,13 +37,13 @@ const HomeSection = props => (
       <h1>I'm Stas</h1>
       <Description>Ask me about 
         <ColoredText>{' '}
-          <TypingAnimation>{[
-            'React/Redux',
-            'functional programming',
-            'JavaScript',
-            'React or another library I should\'ve used instead',
-            'frontend. I\'d be glad to answer literally any question'
-          ]}</TypingAnimation>
+          <TypingAnimation>
+            {'React/Redux'}
+            {'functional programming'}
+            {'JavaScript'}
+            {'React or another library I should\'ve used instead'}
+            {'frontend. I\'d be glad to answer literally any question'}
+          </TypingAnimation>
         </ColoredText>
       </Description>
     </ContentWrapper>

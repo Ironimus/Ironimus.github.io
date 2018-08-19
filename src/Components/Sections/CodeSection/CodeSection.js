@@ -6,6 +6,10 @@ import SectionWrapper from 'Components/Sections/SectionWrapper';
 import CurrentFileBar from './CurrentFileBar';
 import CodeView from './CodeView';
 import { media } from 'utils/constants';
+import { FetchData } from 'utils';
+import { fetchFileTree, getFile, DEFAULT_FILE_URL } from './fetchCode';
+import { findByUrl } from 'utils/functions';
+import Loading from 'Components/Loading';
 
 const CodeSectionWrapper = SectionWrapper.extend`
   ${media.mobile} {
@@ -15,127 +19,87 @@ const CodeSectionWrapper = SectionWrapper.extend`
 `;
 
 const StyledCodeSection = styled.div`
-  height: 100%;
+  height: 90vh;
   display: flex;
   position: relative;
 `;
 
 class CodeSection extends Component {
   state = {
-    isFileTreeVisible: false
+    isFileTreeVisible: false,
+    fileTree: {isLoading: true},
+    currentFileUrl: DEFAULT_FILE_URL
   };
 
   toggleFileTree = () =>
     this.setState(prevState => ({isFileTreeVisible: !prevState.isFileTreeVisible}));
 
-  hideFileTree = () => 
+  hideFileTree = () =>
     this.setState({isFileTreeVisible: false});
+
+  updateFileTree = fileTree =>
+    this.setState({fileTree});
+
+  updateCurrentFileUrl = currentFileUrl =>
+    this.setState({currentFileUrl});
 
   render() {
     const { projects, activeProject, files, currentFile, ...props } = this.props;
-    const { isFileTreeVisible } = this.state;
+    const { isFileTreeVisible, currentFileUrl, fileTree } = this.state;
     return (
-      <CodeSectionWrapper {...props}>
-        <ProjectList active={activeProject}>{projects}</ProjectList>
-        <CurrentFileBar toggleHandler={this.toggleFileTree} url='asdf/fdsa/ddd' />
-        <StyledCodeSection>
-          <FileTree
-            hideFileTree={this.hideFileTree}
-            isVisible={isFileTreeVisible}
-          >{files}</FileTree>
-          <CodeView>
-            {currentFile.text}
-          </CodeView>
-        </StyledCodeSection>
-      </CodeSectionWrapper>
+      <FetchData
+        loadFunction={fetchFileTree}
+        setDataState={this.updateFileTree}
+      >{() => (
+        <CodeSectionWrapper {...props}>
+          <ProjectList>
+            {{name: 'This portfolio', link: 'github', url: 'https://github.com/Ironimus/portfolio'}}
+            {{name: 'Another project', link: 'soon'}}
+          </ProjectList>
+          <CurrentFileBar
+            url={currentFileUrl}
+            toggleHandler={this.toggleFileTree}
+            updateCurrentFileUrl={this.updateCurrentFileUrl}
+          />
+          <StyledCodeSection>
+            <FileTree
+              hideFileTree={this.hideFileTree}
+              updateCurrentFileUrl={this.updateCurrentFileUrl}
+              updateFileTree={this.updateFileTree}
+              isVisible={isFileTreeVisible}
+            >{
+              !fileTree.isLoading &&
+                fileTree.data
+            }</FileTree>
+              {fileTree.isLoading
+                ? <Loading />
+                : (
+                  <FetchData
+                    loadFunction={getFile}
+                    args={{url:currentFileUrl, fileTree: fileTree.data}}
+                    shouldUpdate={(prev, next) => prev.url !== next.url}
+                  >
+                  {file => (
+                    file.isLoading
+                    ? <Loading />
+                    : (
+                      file.data
+                        ? <CodeView highlight={
+                          findByUrl(currentFileUrl, fileTree.data).syntax
+                        }>
+                          {file.data}
+                        </CodeView>
+                        : 'File is binary or empty'
+                    )
+                  )}
+                  </FetchData>
+                )
+              }
+          </StyledCodeSection>
+        </CodeSectionWrapper>
+      )}</FetchData>
     );
   }
 }
-const CodeSectionForDebugging = ({ ...props }) => (
-  <CodeSection
-    {...props}
-    projects={[
-      {name: 'This portfolio', url: ''},
-      {name: 'Another project', url: ''}
-    ]}
-    activeProject={0}
-    files={{
-      folder: {
-        children: {
-          'Active file.js': {
-            isActive: true,
-            kind: 'file'
-          },
-          'Inactive file.json': {
-            isActive: false,
-            kind: 'file'
-          },
-          'Another file.css': {
-            isActive: false,
-            kind: 'file'
-          }
-        },
-        kind: 'folderOpen'
-      },
-      'README.md': {
-        kind: 'file'
-      }
-    }}
-    currentFile={{
-      url: 'asdf/fdsa',
-      text: [
-"// @flow",
-"import React, { Fragment, Component } from 'react';",
-"import { ThemeProvider } from 'styled-components';",
-"import Menu from '../Menu';",
-"import { HomeSection, SkillSection, StyledCodeSection } from '../Sections';",
-"import { defaultTheme } from './theme';",
-"",
-"type State = {",
-"  activeSection: number,",
-"};",
-"",
-"export default class extends Component<void, State> {",
-"  state = {",
-"    activeSection: 0",
-"  };",
-"",
-"  changeSection = (",
-"    to: number | number => number",
-"  ) => {",
-"    this.setState(state => ({",
-"      activeSection: typeof to === 'number' ? to : to(state.activeSection)",
-"    }));",
-"  }",
-"  ",
-"  render() {",
-"    const { activeSection } = this.state;",
-"    return (",
-"      <ThemeProvider theme={defaultTheme}>",
-"        <Fragment>",
-"          <HomeSection />",
-"          <SkillSection />",
-"          <StyledCodeSection />",
-"          <Menu",
-"            activeSection={activeSection}",
-"            onClick={this.changeSection}",
-"          >{[",
-"            'Home',",
-"            'Skills',",
-"            {",
-"              mobile: 'My code',",
-"              desktop: 'Look at my code'",
-"            },",
-"            'Contact'",
-"          ]}</Menu>",
-"        </Fragment>",
-"      </ThemeProvider>",
-"    );",
-"  }",
-"}",
-      ].join('\n')
-    }}
-  />
-);
 
-export default CodeSectionForDebugging;
+export default CodeSection;

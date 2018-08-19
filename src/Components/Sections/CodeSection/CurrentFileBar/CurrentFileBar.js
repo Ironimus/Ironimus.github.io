@@ -1,8 +1,7 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import {
   FileListButton,
-  StyledBreadcrumbs,
-  BreadcrumbStep,
+  Breadcrumbs,
   StyledBar,
   ArrowDownButtonSvg
 } from './Styled';
@@ -18,23 +17,13 @@ const ShowFileList = ({ children, onClick }) => (
   </FileListButton>
 );
 
-const Breadcrumbs = ({ children }) => (
-  <StyledBreadcrumbs>
-    {children.split('/').map((step, i, urlArr) => (
-      <Fragment key={i}>
-        <BreadcrumbStep>{step}</BreadcrumbStep>{urlArr[i + 1] && '/'}
-      </Fragment>
-    ))}
-  </StyledBreadcrumbs>
-);
-
 const CurrentFileBar = ({ url, toggleHandler }) => (
   <StyledBar>
     <Breadcrumbs>{url}</Breadcrumbs>
     <Media 
         width={breakpoints.fileTreeVisibility}
         smaller={
-          <ShowFileList onClick={toggleHandler}>FileList</ShowFileList>
+          <ShowFileList onClick={toggleHandler}>File list</ShowFileList>
         }
       />
   </StyledBar>

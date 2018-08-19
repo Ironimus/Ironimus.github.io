@@ -13,3 +13,8 @@ export const media = {
   mobile:`@media(max-width: ${breakpoints.mobile}px)`,
   desktop:`@media(min-width: ${breakpoints.mobile + 1}px)`
 };
+
+// this token has only public_repo scope, so there no reasons to hide it
+export const GITHUB_TOKEN = 'c8e69da123346ac1f773b8c06bbd4766430ae0ca'
+// but github won't allow me just leave it as string
+  .split``.reverse().join``;

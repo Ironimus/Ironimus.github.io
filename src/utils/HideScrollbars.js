@@ -1,17 +1,24 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const Inner = styled.div`
   width: 100%;
   height: 100%;
-  padding-right: ${props => props.padding}px;
-  padding-bottom: ${props => props.padding}px;
-  overflow: auto;
+  padding-right: ${props => props.padding || 0}px;
+  padding-bottom: ${props => props.padding || 0}px;
+  overflow: scroll;
+  ${props => props.padding === null && css`
+    ::before {
+      content: '';
+      display: block;
+      height: calc(100% + 1px);
+      width: calc(100% + 1px);
+    }
+  `}
   ${props => props.innerStyle && props.innerStyle(props)}
 `;
 
 const Outer = styled.div`
-  height: 90vh;
   overflow: hidden;
   box-shadow: inset -10px -10px 5px -5px rgba(0, 0, 0, .1);
   ${props => props.outerStyle && props.outerStyle(props)}
@@ -20,7 +27,7 @@ const Outer = styled.div`
 export default class extends Component {
   ref = React.createRef();
   state = {
-    padding: 0
+    padding: null
   };
 
   componentDidMount() {
@@ -30,13 +37,14 @@ export default class extends Component {
   }
 
   render() {
-    const { outerStyle, innerStyle } = this.props;
+    const { outerStyle, innerStyle, ...props } = this.props;
     return (
-      <Outer outerStyle={outerStyle}>
+      <Outer outerStyle={outerStyle} {...props}>
         <Inner
           innerRef={x => this.ref = x}
           padding={this.state.padding}
           innerStyle={innerStyle}
+          {...props}
         >
           {this.props.children}
         </Inner>
