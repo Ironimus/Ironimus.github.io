@@ -4,7 +4,7 @@ import { GITHUB_TOKEN } from 'utils/constants';
 const GET_FILE_TREE = `
   query ($branch: GitObjectID){
     repository(owner: "Ironimus", name: "Ironimus.github.io") {
-      object(expression: "master:", oid: $branch) {
+      object(expression: "ghp-deployment:", oid: $branch) {
         ... on Tree {
           entries {
             oid
@@ -19,7 +19,7 @@ const GET_FILE_TREE = `
 
 const GET_FILE = `
   query ($id: GitObjectID){ 
-    repository(owner: "Ironimus", name: "portfolio") {
+    repository(owner: "Ironimus", name: "Ironimus.github.io") {
       object(oid: $id) {   
         ... on Blob {
           text
