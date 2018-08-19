@@ -3,7 +3,7 @@ import { GITHUB_TOKEN } from 'utils/constants';
 
 const GET_FILE_TREE = `
   query ($branch: GitObjectID){
-    repository(owner: "Ironimus", name: "portfolio") {
+    repository(owner: "Ironimus", name: "Ironimus.github.io") {
       object(expression: "master:", oid: $branch) {
         ... on Tree {
           entries {
