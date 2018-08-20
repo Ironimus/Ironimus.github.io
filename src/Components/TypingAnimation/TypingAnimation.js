@@ -7,21 +7,26 @@ export default class TypingAnimation extends Component {
     isTyping: false
   };
 
-  animateTyping(items, currentItem) {
-    const { delayBefore, delayAfter, typeSpeed, untypeSpeed } = this.props;
-    this.typeText({
+  async animateTyping(items, currentItem) {
+    const {
+      delayBefore=1000,
+      delayAfter=2000,
+      typeSpeed=7,
+      untypeSpeed=20
+    } = this.props;
+    await this.typeText({
       text: items[currentItem],
-      delay: delayBefore || 1000,
-      speed: typeSpeed || 7
-    })
-      .then(() => this.untypeText({
-        delay: delayAfter || 2000,
-        speed: untypeSpeed || 20
-      }))
-      .then(() => this.animateTyping(
-        items,
-        currentItem === items.length - 1 ? 0 : currentItem + 1)
-      );
+      delay: delayBefore,
+      speed: typeSpeed
+    });
+    await this.untypeText({
+      delay: delayAfter,
+      speed: untypeSpeed
+    });
+    await this.animateTyping(
+      items,
+      currentItem === items.length - 1 ? 0 : currentItem + 1
+    );
   }
 
   typeText = ({ text, delay, speed }) => new Promise(resolve => {
@@ -39,7 +44,7 @@ export default class TypingAnimation extends Component {
     }, delay)
   });
 
-  untypeText =({ delay, speed }) => new Promise(resolve => {
+  untypeText = ({ delay, speed }) => new Promise(resolve => {
     this.timeoutId = setTimeout(() => {
       this.intervalId = setInterval(() => {
         if(this.state.currentText === '') {

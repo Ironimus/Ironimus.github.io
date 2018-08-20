@@ -30,7 +30,7 @@ const ColoredText = styled.span`
   color: ${colors.complementary};
 `;
 
-const HomeSection = props => (
+const HomeSection = ({ scrollToSection, ...props }) => (
   <StyledHomeSection {...props}>
     <ContentWrapper>
       <SmallerH1>Hi,</SmallerH1>
@@ -49,7 +49,7 @@ const HomeSection = props => (
     </ContentWrapper>
       <Media
         width={breakpoints.mobile}
-        larger={<ArrowDown>Skills</ArrowDown>}
+        larger={<ArrowDown onClick={() => scrollToSection(1)}>Skills</ArrowDown>}
       />
   </StyledHomeSection>
 );

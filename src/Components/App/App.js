@@ -33,15 +33,12 @@ export default class extends Component {
     });
   }
 
-  scrollToSection = (toSection) => {
-    const { activeSection, sectionsRefs } = this.state;
-    const nextSection = typeof toSection === 'number' 
-      ? toSection 
-      : toSection(activeSection);
-    this.changeSection(nextSection);
+  scrollToSection = async (toSection) => {
+    const { sectionsRefs } = this.state;
+    this.changeSection(toSection);
     this.setState({checkScroll: false})
-    smoothScroll(sectionsRefs[nextSection].current.offsetTop)
-      .then(() => this.setState({checkScroll: true}));
+    await smoothScroll(sectionsRefs[toSection].current.offsetTop)
+    this.setState({checkScroll: true});
   }
 
   scrollHandler = () => {
@@ -73,6 +70,7 @@ export default class extends Component {
           {Object.values(Sections).map((Section, i) => (
             <Section
               changeSection={this.changeSection}
+              scrollToSection={this.scrollToSection}
               setSectionRef={this.setSectionRef(i)}
               key={i}
             />

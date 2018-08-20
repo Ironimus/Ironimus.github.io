@@ -41,8 +41,8 @@ const ArrowDown = styled.div`
   }
 `;
 
-export default ({ children }) => (
-  <ArrowDown>
+export default ({ children, onClick }) => (
+  <ArrowDown onClick={onClick}>
     <Sub>{children}</Sub>
     <Svg>
       <Path d='M132.806 0L66.4028 32.7175L0 0' stroke-linecap='round' stroke-linejoin='round' />
