@@ -58,7 +58,7 @@ export const fetchFileTree = async (branch=null, url='', depth=0) => {
       branch
     }
   });
-  return await Promise.all(entries.map(async e => e.type === 'tree'
+  return (await Promise.all(entries.map(async e => e.type === 'tree'
     ? {
       ...e,
       children: await fetchFileTree(e.oid, `${url}${e.name}/`, depth + 1),
@@ -73,7 +73,7 @@ export const fetchFileTree = async (branch=null, url='', depth=0) => {
       syntax: determineSyntax(e.name),
       isActive: e.name === DEFAULT_FILE_URL
     }
-  ));
+  ))).sort(e => e.type !== 'tree');
 }
 
 export const getFile = async ({url, fileTree}) => {

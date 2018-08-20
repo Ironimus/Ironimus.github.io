@@ -35,14 +35,14 @@ const HomeSection = props => (
     <ContentWrapper>
       <SmallerH1>Hi,</SmallerH1>
       <h1>I'm Stas</h1>
-      <Description>Ask me about 
-        <ColoredText>{' '}
+      <Description>Ask me about&nbsp;
+        <ColoredText>
           <TypingAnimation>
             {'React/Redux'}
             {'functional programming'}
             {'JavaScript'}
             {'React or another library I should\'ve used instead'}
-            {'frontend. I\'d be glad to answer literally any question'}
+            {'styled components and why css-in-js is cool'}
           </TypingAnimation>
         </ColoredText>
       </Description>
