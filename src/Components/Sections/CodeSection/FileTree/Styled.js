@@ -27,7 +27,7 @@ const StyledFileTree = props => css`
 	}
 `
 
-export const FileTree = ({ children, isVisible }) => (
+export const FileTreeWrap = ({ children, isVisible }) => (
 	<HideScrollbars outerStyle={StyledFileTree} isVisible={isVisible}>
 		{children}
 	</HideScrollbars>

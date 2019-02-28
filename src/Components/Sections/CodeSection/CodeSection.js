@@ -40,7 +40,7 @@ class CodeSection extends Component {
 	updateCurrentFileUrl = currentFileUrl => this.setState({ currentFileUrl })
 
 	render() {
-		const { projects, activeProject, files, currentFile, ...props } = this.props
+		const { ...props } = this.props
 		const { isFileTreeVisible, currentFileUrl, fileTree } = this.state
 		return (
 			<FetchData loadFunction={fetchFileTree} setDataState={this.updateFileTree}>

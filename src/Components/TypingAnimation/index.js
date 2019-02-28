@@ -1,1 +1,2 @@
-export { default } from './TypingAnimation'
+export { default as WithBlinkingCursor } from './WithBlinkingCursor'
+export { default as useTypingAnimation } from './useTypingAnimation'

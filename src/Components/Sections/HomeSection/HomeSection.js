@@ -3,7 +3,7 @@ import SectionWrapper from 'Components/Sections/SectionWrapper'
 import styled from 'styled-components'
 import { Media } from 'utils'
 import ArrowDown from './ArrowDown'
-import TypingAnimation from 'Components/TypingAnimation'
+import { useTypingAnimation, WithBlinkingCursor } from 'Components/TypingAnimation'
 import { colors, breakpoints } from 'utils/constants'
 
 const StyledHomeSection = styled(SectionWrapper)`
@@ -30,26 +30,33 @@ const ColoredText = styled.span`
 	color: ${colors.complementary};
 `
 
-const HomeSection = ({ scrollToSection, ...props }) => (
-	<StyledHomeSection {...props}>
-		<ContentWrapper>
-			<SmallerH1>Hi,</SmallerH1>
-			<h1>I'm Stas</h1>
-			<Description>
-				Ask me about&nbsp;
-				<ColoredText>
-					<TypingAnimation>
-						{'React/Redux'}
-						{'functional programming'}
-						{'JavaScript'}
-						{"React or another library I should've used instead"}
-						{'styled components and why css-in-js is cool'}
-					</TypingAnimation>
-				</ColoredText>
-			</Description>
-		</ContentWrapper>
-		<Media width={breakpoints.mobile} larger={<ArrowDown onClick={() => scrollToSection(1)}>Skills</ArrowDown>} />
-	</StyledHomeSection>
-)
+const HomeSection = ({ scrollToSection, ...props }) => {
+	const [animatedText, isTyping] = useTypingAnimation([
+		'React/Redux',
+		'functional programming',
+		'JavaScript',
+		"React or another library I should've used instead",
+		'styled components and why css-in-js is cool',
+	])
+
+	return (
+		<StyledHomeSection {...props}>
+			<ContentWrapper>
+				<SmallerH1>Hi,</SmallerH1>
+				<h1>I'm Stas</h1>
+				<Description>
+					Ask me about{' '}
+					<ColoredText>
+						<WithBlinkingCursor stopped={isTyping}>{animatedText}</WithBlinkingCursor>
+					</ColoredText>
+				</Description>
+			</ContentWrapper>
+			<Media
+				width={breakpoints.mobile}
+				larger={<ArrowDown onClick={() => scrollToSection(1)}>Skills</ArrowDown>}
+			/>
+		</StyledHomeSection>
+	)
+}
 
 export default HomeSection

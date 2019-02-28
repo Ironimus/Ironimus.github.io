@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { FileTree, Element } from './Styled'
+import { FileTreeWrap, Element } from './Styled'
 import { changeTreeElement } from 'utils/functions'
 
 const makeTree = (subtree, props, fullTree = subtree, depth = 0) =>
@@ -41,10 +41,12 @@ const makeTree = (subtree, props, fullTree = subtree, depth = 0) =>
 		</Fragment>
 	))
 
-export default ({ children, isVisible, hideFileTree, updateCurrentFileUrl, updateFileTree }) => (
-	<FileTree isVisible={isVisible}>
+const FileTree = ({ children, isVisible, hideFileTree, updateCurrentFileUrl, updateFileTree }) => (
+	<FileTreeWrap isVisible={isVisible}>
 		{Array.isArray(children)
 			? makeTree(children, { hideFileTree, updateCurrentFileUrl, updateFileTree })
 			: children}
-	</FileTree>
+	</FileTreeWrap>
 )
+
+export default FileTree

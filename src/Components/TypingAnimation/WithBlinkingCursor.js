@@ -24,10 +24,12 @@ export default styled.span`
 		margin-left: 3px;
 		background-color: #fff;
 		vertical-align: baseline;
+		animation: ${blink} 1s linear infinite;
 		${props =>
-			!props.stopped &&
+			props.stopped &&
 			css`
-				animation: ${blink} 1s linear infinite;
+				animation: none;
+				opacity: 1 !important;
 			`};
 	}
 `
