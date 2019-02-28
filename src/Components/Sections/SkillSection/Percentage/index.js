@@ -1,1 +1,1 @@
-export { default } from './PercentageList';
+export { default } from './PercentageList'

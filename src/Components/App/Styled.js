@@ -1,5 +1,5 @@
-import { injectGlobal } from 'styled-components';
-import { colors } from 'utils/constants';
+import { injectGlobal } from 'styled-components'
+import { colors } from 'utils/constants'
 
 injectGlobal`
   @import url('https://fonts.googleapis.com/css?family=Roboto:300,400');
@@ -27,4 +27,4 @@ injectGlobal`
   h1, h2, h3, h4 {
     font-weight: normal;
   }
-`;
+`

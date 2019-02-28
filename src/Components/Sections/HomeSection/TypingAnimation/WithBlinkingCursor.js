@@ -1,4 +1,4 @@
-import styled, { keyframes, css } from 'styled-components';
+import styled, { keyframes, css } from 'styled-components'
 
 const blink = keyframes`
   0% {
@@ -16,16 +16,18 @@ const blink = keyframes`
 `
 
 export default styled.span`
-  ::after {
-    content: '';
-    display: inline-block;
-    width: 1px;
-    height: 20px;
-    margin-left: 3px;
-    background-color: #fff;
-    vertical-align: baseline;
-    ${props => !props.stopped &&
-      css`animation: ${blink} 1s linear infinite;`
-    }
-  }
+	::after {
+		content: '';
+		display: inline-block;
+		width: 1px;
+		height: 20px;
+		margin-left: 3px;
+		background-color: #fff;
+		vertical-align: baseline;
+		${props =>
+			!props.stopped &&
+			css`
+				animation: ${blink} 1s linear infinite;
+			`};
+	}
 `

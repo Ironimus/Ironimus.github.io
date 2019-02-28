@@ -1,36 +1,37 @@
-import React from 'react';
-import styled, { css } from 'styled-components';
-import icons from './icons';
-import { colors, breakpoints } from 'utils/constants';
-import { HideScrollbars } from 'utils';
+import React from 'react'
+import styled, { css } from 'styled-components'
+import icons from './icons'
+import { colors, breakpoints } from 'utils/constants'
+import { HideScrollbars } from 'utils'
 
 const StyledFileTree = props => css`
-  width: 25%;
-  @media (max-width: ${breakpoints.fileTreeVisibility}px) {
-    opacity: 0;
-    transform: translateY(-20px);
-    background-color: ${colors.background};
-    width: 100%;
-    height: 100%;
-    box-sizing: border-box;
-    position: absolute;
-    top: 0;
-    pointer-events: none;
-    transition: transform .3s, opacity .2s .1s;
-    ${props.isVisible && css`
-      z-index: 9;
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: all;
-    `}
-  }
-`;
+	width: 25%;
+	@media (max-width: ${breakpoints.fileTreeVisibility}px) {
+		opacity: 0;
+		transform: translateY(-20px);
+		background-color: ${colors.background};
+		width: 100%;
+		height: 100%;
+		box-sizing: border-box;
+		position: absolute;
+		top: 0;
+		pointer-events: none;
+		transition: transform 0.3s, opacity 0.2s 0.1s;
+		${props.isVisible &&
+			css`
+				z-index: 9;
+				opacity: 1;
+				transform: translateY(0);
+				pointer-events: all;
+			`};
+	}
+`
 
 export const FileTree = ({ children, isVisible }) => (
-  <HideScrollbars outerStyle={StyledFileTree} isVisible={isVisible}>
-    {children}
-  </HideScrollbars>
-);
+	<HideScrollbars outerStyle={StyledFileTree} isVisible={isVisible}>
+		{children}
+	</HideScrollbars>
+)
 
 export const Element = styled.div`
   color: ${props => props.isActive && '#fff'};
@@ -55,4 +56,4 @@ export const Element = styled.div`
       height: 22px;
     }
   }
-`;
+`

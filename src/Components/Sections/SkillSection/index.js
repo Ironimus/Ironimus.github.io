@@ -1,1 +1,1 @@
-export { default } from './SkillSection';
+export { default } from './SkillSection'

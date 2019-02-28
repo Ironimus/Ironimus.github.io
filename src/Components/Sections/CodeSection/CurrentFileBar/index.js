@@ -1,1 +1,1 @@
-export { default } from './CurrentFileBar';
+export { default } from './CurrentFileBar'

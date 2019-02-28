@@ -1,1 +1,1 @@
-export { default } from './TypingAnimation';
+export { default } from './TypingAnimation'
