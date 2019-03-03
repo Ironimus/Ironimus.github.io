@@ -33,7 +33,7 @@ const ColoredText = styled.span`
 const HomeSection = ({ scrollToSection, ...props }) => {
 	const [animatedText, isTyping] = useTypingAnimation([
 		'React/Redux',
-		'functional programming',
+		"react hooks and why I'm so excited about them",
 		'JavaScript',
 		"React or another library I should've used instead",
 		'styled components and why css-in-js is cool',

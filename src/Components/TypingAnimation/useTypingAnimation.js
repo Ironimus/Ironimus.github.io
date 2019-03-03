@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 
-const useTyping = (items, { typingSpeed = 11, delay = 700, untypingSpeed = 20 } = {}) => {
+const useTyping = (items, { typingSpeed = 11, delay = 1800, maxDeviations = 7, untypingSpeed = 18 } = {}) => {
 	const timerId = useRef(null)
 
 	const [currentItem, setCurrentItem] = useState(0)
@@ -16,7 +16,7 @@ const useTyping = (items, { typingSpeed = 11, delay = 700, untypingSpeed = 20 } 
 					} else {
 						setTypingState('pause')
 					}
-				}, 1000 / typingSpeed)
+				}, 1000 / (typingSpeed - Math.floor(Math.random() * maxDeviations)))
 			}
 
 			if (typingState === 'pause' && delay) {
