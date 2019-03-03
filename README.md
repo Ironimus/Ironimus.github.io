@@ -8,6 +8,6 @@ Technologies used to make this portfolio:
 
 ### About me
 
-My name is Stas and I'm a front-end developer looking for a job. I live in Ivano-Frankivsk, Ukraine. I really like working with js and React specifically.
+My name is Stas and I'm a front-end developer living in Ivano-Frankivsk, Ukraine and looking for a job. I really like working with js and React specifically.
 
-Note: apart from a small refactoring this portfolio was written in Aug 2018 and doesn't necessarily represent my current approaches to writing code accurately.
+Note: apart from a small refactoring this portfolio was written in Aug 2018 and doesn't necessarily represent my current approaches to writing code.

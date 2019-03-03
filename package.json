@@ -4,7 +4,6 @@
 	"private": true,
 	"homepage": "https://Ironimus.github.io/",
 	"dependencies": {
-		"gh-pages": "^1.2.0",
 		"polished": "^1.9.3",
 		"react": "^16.8.3",
 		"react-dom": "^16.8.3",
@@ -23,6 +22,7 @@
 	},
 	"devDependencies": {
 		"eslint": "^5.14.1",
-		"eslint-plugin-react": "^7.12.4"
+		"eslint-plugin-react": "^7.12.4",
+		"gh-pages": "^2.0.1"
 	}
 }
